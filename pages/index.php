@@ -21,7 +21,7 @@ require '../includes/config.php';
       <div class="container">
          <?php require '../includes/header.php'; ?>
          <?php
-         $bestsellers = mysqli_query($connection, "SELECT * FROM `books` ORDER BY `sold_count` DESC LIMIT 8");
+         $bestsellers = mysqli_query($connection, "SELECT * FROM `books` ORDER BY `sold_count` DESC LIMIT 12");
          ?>
          <div class="bestsellers">
             <div class="bestsellers__title">
@@ -44,7 +44,7 @@ require '../includes/config.php';
                            <?php echo $bestseller['author']; ?>
                         </div>
                         <div class="item-bestsellers__price">
-                           <?php echo $bestseller['price'] . 'грн'; ?>
+                           <?php echo $bestseller['price'] . ' грн'; ?>
                         </div>
                         <div class="item-bestsellers__buttons">
                            <a class="item-bestsellers__decription item-bestsellers__button" href="">
@@ -60,11 +60,11 @@ require '../includes/config.php';
                }
                ?>
             </div>
-            <button class="bestsellers__button">
-               <a class="bestsellers__link">
-                  Catalog
-               </a>
-            </button>
+            <a class="bestsellers__button" href="/Test-Internet-Shop/pages/catalog.php">
+               <!-- <a class="bestsellers__link" href="/Test-Internet-Shop/pages/catalog.php"> -->
+               Catalog
+               <!-- </a> -->
+            </a>
          </div>
          <?php require '../includes/footer.php'; ?>
       </div>
