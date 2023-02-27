@@ -1,0 +1,303 @@
+@import url('zero.css');
+
+.wrapper {
+   font-family: 'Montserrat';
+}
+.container {
+}
+/*------------------------------HEADER----------------------------------------*/
+.header {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   /* gap:50px; */
+   /* border:2px solid green; */
+   background-color: #f0dfcd;
+   padding: 5px 20px;
+}
+.header__logo {
+}
+.header__logo img{
+   width: 30px;
+}
+.header__search {
+}
+.search-header {
+   /* border:2px solid gray; */
+   flex: 0 1 25%;
+   position: relative;
+}
+.search-header__form {
+}
+.search-header__input {
+   border:1px solid #000000;
+   height: 30px;
+   width: 100%;
+   border-radius: 10px;
+}
+.search-header img{
+   width: 20px;
+   position: absolute;
+   top: 15%;
+   right: 0%;
+
+}
+.header__pages {
+   flex: 0 1 50%;
+   display: flex;
+   justify-content: space-around;
+   align-items: center;
+   /* border:2px solid red; */
+}
+.header__page {
+}
+.header__link-to-page {
+   color:#ffffff;
+   font-weight: 600;
+   font-size: 18px;
+}
+.header__link-to-page:hover{
+   text-decoration: underline;
+   color: #d3b499;
+}
+.header__link-to-page img{
+   width: 30px;
+}
+
+
+/*------------------------------------------BESTSELLERS----------------------------------------------*/
+.bestsellers {
+   background-color: #e4e4e4;
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   padding-bottom: 50px;
+}
+.bestsellers__title {
+   font-weight: 500;
+   color:rgb(26, 26, 26);
+   font-size: 32px;
+   text-align: center;
+   padding: 30px 0px;
+   margin-bottom: 100px;
+}
+.bestsellers__body {
+   display: grid;
+   grid-template-columns: 1fr 1fr 1fr 1fr;
+   grid-template-rows: 1fr 1fr;
+   gap:30px;
+}
+.bestsellers__item {
+   /* border:2px solid green; */
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   margin-bottom: 80px;
+}
+.item-bestsellers {
+}
+.item-bestsellers__body{
+   background-color: #f0dfcd;
+   padding: 50px 60px 20px 60px;
+   /* border:3px solid red; */
+   max-width: 100px;
+   border-radius:20px;
+   position: relative;
+}
+.item-bestsellers__body img{
+   
+}
+.item-bestsellers__bookimage {
+   border-radius:10px;
+   max-width: 120px;
+   position: absolute;
+   top:0%;
+   left:50%;
+   transform:translate(-50%, -50%);
+}
+.item-bestsellers__favourite {
+   border-radius:10px;
+   max-width: 35px;
+   position: absolute;
+   top:7%;
+   right:0%;
+   transform:translate(-20%,0%);
+}
+.item-bestsellers__title {
+   display: block;
+   margin-top: 50px;
+   color:#000000;
+   font-weight: 600;
+   font-size: 20px;
+   text-align: center;
+   margin-bottom: 10px;
+}
+.item-bestsellers__author {
+   color:#888888;
+   font-weight: 600;
+   font-size: 16px;
+   text-align: center;
+   margin-bottom: 10px;
+   /* border:2px solid green;
+   width: 100%; */
+}
+.item-bestsellers__price {
+   color:#151515;
+   font-weight: 600;
+   font-size: 16px;
+   text-align: center;
+   margin-bottom: 60px;
+}
+/* .item-bestsellers__button {
+   padding: 10px 30px;
+   background-color: #3bf2a3;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   border-radius: 10px;
+} */
+
+.item-bestsellers__buttons {
+   /* border:2px solid red;
+   display: flex; */
+}
+.item-bestsellers__button{
+   text-align: center;
+   color:#ffffff;
+   font-weight: 500;
+   font-size: 16px;
+   padding: 10px 10px;
+   border-radius: 10px;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   transition-property: background-color;
+   transition-duration: 0.4s;
+   transition-timing-function: ease;
+   position: absolute;
+   
+}
+.item-bestsellers__buy {
+   background-color: #3bf2a3;
+   bottom:5%;
+   right:5%;
+}
+.item-bestsellers__buy:hover {
+   background-color: #26a06b;
+}
+
+.item-bestsellers__decription {
+   background-color: #f2b83b;
+   bottom:5%;
+   left:5%;
+   padding: 10px 18px;
+}
+.item-bestsellers__decription:hover {
+   background-color: #a88932;
+}
+.bestsellers__button {
+   padding: 10px 30px;
+   background-color: #26a06b;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   border-radius: 10px;
+   width: 300px;
+   transition-duration: 0.4s;
+   transition-timing-function: ease;
+}
+.bestsellers__button:hover {
+   background-color: #1b724c;
+}
+.bestsellers__link {
+   text-align: center;
+   color:#ffffff;
+   font-weight: 500;
+   font-size: 16px;
+}
+
+
+/*--------------------------------------FOOTER-----------------------------------------------*/
+.footer {
+   background-color: #675f57;
+   padding: 10px 50px;
+}
+.footer__body {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+}
+.footer__logo {
+   display: flex;
+   /* border:2px solid green; */
+   align-items: center;
+   gap:10px;
+}
+.footer__logo img{
+   width: 30px;
+}
+.logo-footer {
+}
+.logo-footer__text {
+   font-family: 'Montserrat';
+font-style: normal;
+font-weight: 600;
+font-size: 20px;
+line-height: 24px;
+color:#ffffff;
+}
+.footer__social {
+}
+.social-footer {
+   display: flex;
+   flex-direction: column;
+   gap:15px;
+}
+.social-footer__text{
+   font-size: 18px;
+   font-weight: 500;
+   color:#ffffff;
+}
+.social-footer__element {
+   display: flex;
+   flex-direction: column;
+   gap:10px;
+   align-items: center;
+}
+.footer__social-icon{
+   width: 40px;
+}
+.footer__qr{
+   width: 80px;
+}
+.footer__navigation {
+   /* border:2px solid red; */
+   
+}
+.navigation-footer {
+}
+.navigation-footer__list {
+   display: grid;
+   grid-template-columns: 1fr 1fr;
+   grid-template-rows: 1fr 1fr;
+   gap:30px;
+}
+.navigation-footer__item {
+}
+.item-navigation-footer {
+}
+.item-navigation-footer__link {
+   font-family: 'Montserrat';
+font-style: normal;
+font-weight: 400;
+font-size: 20px;
+line-height: 24px;
+color: #FFFFFF;
+}
+.item-navigation-footer__link:hover{
+   text-decoration: underline;
+   /* cursor: pointer; */
+   color: #d3b499;
+}
+/*-------------------------------------ADDITIONAL CLASSES-------------------------------------*/
