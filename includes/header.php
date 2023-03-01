@@ -1,7 +1,7 @@
 <header class="header">
    <div class="header__logo logo-header">
       <img src="../static/svg/logo.svg" alt="">
-      <p class='logo-header__text'><?php echo $config['title']; ?></p>
+      <a class='logo-header__text' href="/Test-Internet-Shop/pages/index.php"><?php echo $config['title']; ?></a>
    </div>
    <div class="header__search search-header">
       <form action="" class="search-header__form">

@@ -1,0 +1,129 @@
+@import url('zero.css');
+@import url('header.css');
+@import url('footer.css');
+@import url('catalog-only.css');
+.wrapper {
+   font-family: 'Montserrat';
+   color: #ffffff;
+}
+.container {
+   
+}
+.content {
+   background-color: #e6bdbd;
+   
+}
+/*--------------------------------------ABOUT-PRODUCT-------------------------------------*/
+.about-product {
+   display: flex;
+   /* border:2px solid green; */
+   padding: 30px;
+   gap:40px;
+}
+.about-product__control {
+   /* border:2px solid black; */
+}
+.about-product__image {
+   margin-bottom: 20px;
+}
+.about-product__buttons {
+   /* border:2px solid white; */
+   display: flex;
+   justify-content: space-around;
+   align-items: center;
+}
+.about-product__button {
+   background-color: #f0dfcd;
+   padding: 5px 20px;
+   border-radius: 15px;
+}
+.about-product__button img{
+   width: 40px;
+}
+.about-product__info {
+}
+.info-about-product {
+}
+.info-about-product__title {
+   font-weight: 700;
+   font-size: 20px;
+   margin-bottom: 10px;
+}
+.info-about-product__item{
+
+} 
+.item-info-about-product{
+
+}
+.item-info-about-product__title {
+   font-weight: 700;
+   font-size: 18px;
+   margin-bottom: 5px;
+}
+.item-info-about-product__text {
+   font-weight: 600;
+   font-size: 18px;
+   margin-bottom: 10px;
+}
+.info-about-product__isInStock {
+   margin-bottom: 10px;
+}
+.isInStock-info-about-product {
+}
+.isInStock-info-about-product__true {
+background-color: #77ed16;
+font-weight: 600;
+font-size: 18px;
+max-width: 200px;
+padding: 5px 10px;
+text-align: center;
+border-radius:10px;
+}
+.isInStock-info-about-product__false {
+   background-color: #ed166c;
+font-weight: 600;
+font-size: 18px;
+max-width: 200px;
+padding: 5px 10px;
+text-align: center;
+border-radius:10px;
+}
+
+.info-about-product__money{
+   display: flex;
+   /* border:2px solid red; */
+   gap: 50px;
+   align-items: center;
+   margin-top: 20px;
+}
+.info-about-product__price {
+   background-color: #f20a6f;
+font-weight: 600;
+font-size: 18px;
+max-width: 200px;
+padding: 10px 20px;
+text-align: center;
+border-radius:10px;
+}
+.info-about-product__buy-active {
+background-color: #77ed16;
+font-weight: 600;
+font-size: 18px;
+max-width: 200px;
+padding: 10px 20px;
+text-align: center;
+border-radius:10px;
+color:#ffffff;
+}
+.info-about-product__buy-not-active{
+   background-color: #595b57;
+font-weight: 600;
+font-size: 18px;
+max-width: 200px;
+padding: 10px 20px;
+text-align: center;
+border-radius:10px;
+color:#ffffff;
+}
+.catalog {
+}

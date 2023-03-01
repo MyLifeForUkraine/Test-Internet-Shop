@@ -1,8 +1,8 @@
 "use strict"
-let items = document.querySelectorAll('.item-bestsellers__body,  .item-catalog__body');
+let items = document.querySelectorAll('.item-catalog__body');
 console.log(items);
-let maxHeightItem = 200;
-let maxWidthItem = 200;
+let maxHeightItem = 0;
+let maxWidthItem = 0;
 // let itemsHeight = [];
 for (let i = 0; i < items.length; i++) {
    // console.log('items[i].clientHeight: ', items[i].clientHeight);

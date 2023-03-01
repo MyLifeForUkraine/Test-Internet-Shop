@@ -20,10 +20,10 @@ require '../includes/config.php';
    <div class="wrapper">
       <div class="container">
          <?php require '../includes/header.php'; ?>
-         <?php
-         $bestsellers = mysqli_query($connection, "SELECT * FROM `books` ORDER BY `sold_count` DESC LIMIT 12");
-         ?>
          <div class="bestsellers">
+            <?php
+            $bestsellers = mysqli_query($connection, "SELECT * FROM `books` ORDER BY `sold_count` DESC LIMIT 12");
+            ?>
             <div class="bestsellers__title">
                Найбільш популярні книги
             </div>
@@ -33,11 +33,11 @@ require '../includes/config.php';
                ?>
                   <div class="bestsellers__item item-bestsellers">
                      <div class="item-bestsellers__body">
-                        <a href="">
+                        <a href="/Test-Internet-Shop/pages/ProductPage.php?id=<?= $bestseller['id'] ?>">
                            <img class='item-bestsellers__bookimage' src="../static/books/<?php echo $bestseller['image'] ?>" alt="">
                         </a>
                         <img class='item-bestsellers__favourite' src="../static/svg/favourite-empty.svg" alt="">
-                        <a class="item-bestsellers__title" href="">
+                        <a class="item-bestsellers__title" href="/Test-Internet-Shop/pages/ProductPage.php?id=<?= $bestseller['id'] ?>">
                            <?php echo $bestseller['title']; ?>
                         </a>
                         <div class="item-bestsellers__author">
