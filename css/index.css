@@ -1,0 +1,159 @@
+@import url('zero.css');
+@import url('header.css');
+@import url('footer.css');
+.wrapper {
+   font-family: 'Montserrat';
+}
+.container {
+}
+
+/*------------------------------------------BESTSELLERS----------------------------------------------*/
+.bestsellers {
+   background-color: #e4e4e4;
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   padding-bottom: 50px;
+}
+.bestsellers__title {
+   font-weight: 500;
+   color:rgb(26, 26, 26);
+   font-size: 32px;
+   text-align: center;
+   padding: 30px 0px;
+   margin-bottom: 100px;
+}
+.bestsellers__body {
+   display: grid;
+   grid-template-columns: 1fr 1fr 1fr 1fr;
+   grid-template-rows: 1fr 1fr;
+   gap:30px;
+}
+.bestsellers__item {
+   /* border:2px solid green; */
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   margin-bottom: 80px;
+}
+.item-bestsellers {
+}
+.item-bestsellers__body{
+   background-color: #f0dfcd;
+   padding: 50px 0px 20px 0px;
+   /* border:3px solid red; */
+   max-width: 200px;
+   border-radius:20px;
+   position: relative;
+}
+.item-bestsellers__body img{
+   
+}
+.item-bestsellers__bookimage {
+   border-radius:10px;
+   max-width: 120px;
+   height: 180px;
+   position: absolute;
+   top:0%;
+   left:50%;
+   transform:translate(-50%, -50%);
+}
+.item-bestsellers__favourite {
+   border-radius:10px;
+   max-width: 30px;
+   position: absolute;
+   top:7%;
+   right:0%;
+   transform:translate(-20%,0%);
+}
+.item-bestsellers__title {
+   display: block;
+   margin-top: 50px;
+   color:#000000;
+   font-weight: 600;
+   font-size: 16px;
+   text-align: center;
+   margin-bottom: 10px;
+   /* border:2px solid green; */
+   width: 100%;
+}
+.item-bestsellers__author {
+   color:#888888;
+   font-weight: 600;
+   font-size: 16px;
+   text-align: center;
+   margin-bottom: 10px;
+   /* border:2px solid green;
+   width: 100%; */
+}
+.item-bestsellers__price {
+   color:#151515;
+   font-weight: 600;
+   font-size: 16px;
+   text-align: center;
+   margin-bottom: 0px;
+}
+
+.item-bestsellers__buttons {
+}
+.item-bestsellers__button{
+   text-align: center;
+   color:#ffffff;
+   font-weight: 500;
+   font-size: 16px;
+   padding: 10px 5px;
+   border-radius: 10px;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   transition-property: background-color;
+   transition-duration: 0.4s;
+   transition-timing-function: ease;
+   position: absolute;
+   
+}
+.item-bestsellers__buy {
+   background-color: #3bf2a3;
+   bottom:5%;
+   right:5%;
+}
+.item-bestsellers__buy:hover {
+   background-color: #26a06b;
+}
+
+.item-bestsellers__decription {
+   background-color: #f2b83b;
+   bottom:5%;
+   left:5%;
+   padding: 10px 18px;
+}
+.item-bestsellers__decription:hover {
+   background-color: #a88932;
+}
+.bestsellers__button {
+   padding: 15px 50px;
+   background-color: #26a06b;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   border-radius: 10px;
+   width: 300px;
+   transition-duration: 0.4s;
+   transition-timing-function: ease;
+   text-align: center;
+   color:#ffffff;
+   font-weight: 500;
+   font-size: 16px;
+}
+.bestsellers__button:hover {
+   background-color: #1b724c;
+}
+.bestsellers__link {
+   text-align: center;
+   color:#ffffff;
+   font-weight: 500;
+   font-size: 16px;
+}
+
+/*-------------------------------------ADDITIONAL CLASSES-------------------------------------*/
