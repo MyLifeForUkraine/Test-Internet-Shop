@@ -36,7 +36,7 @@ require '../includes/config.php';
                         <a href="/Test-Internet-Shop/pages/ProductPage.php?id=<?= $bestseller['id'] ?>">
                            <img class='item-bestsellers__bookimage' src="../static/books/<?php echo $bestseller['image'] ?>" alt="">
                         </a>
-                        <img class='item-bestsellers__favourite' src="../static/svg/favourite-empty.svg" alt="">
+                        <img id=<?php echo $bestseller['id'] ?> class='item-bestsellers__favourite' src="../static/svg/favourite-empty.svg" alt="">
                         <a class="item-bestsellers__title" href="/Test-Internet-Shop/pages/ProductPage.php?id=<?= $bestseller['id'] ?>">
                            <?php echo $bestseller['title']; ?>
                         </a>
@@ -47,7 +47,7 @@ require '../includes/config.php';
                            <?php echo $bestseller['price'] . ' грн'; ?>
                         </div>
                         <div class="item-bestsellers__buttons">
-                           <a class="item-bestsellers__decription item-bestsellers__button" href="">
+                           <a class="item-bestsellers__decription item-bestsellers__button" href="/Test-Internet-Shop/pages/ProductPage.php?id=<?= $bestseller['id'] ?>">
                               Опис
                            </a>
                            <a class="item-bestsellers__buy item-bestsellers__button" href="">

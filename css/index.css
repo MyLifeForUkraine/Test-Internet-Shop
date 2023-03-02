@@ -60,6 +60,7 @@
    transform:translate(-50%, -50%);
 }
 .item-bestsellers__favourite {
+   cursor:pointer;
    border-radius:10px;
    max-width: 30px;
    position: absolute;

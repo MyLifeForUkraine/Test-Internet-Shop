@@ -143,7 +143,7 @@ require '../includes/config.php';
                            <a href="/Test-Internet-Shop/pages/ProductPage.php?id=<?= $bestseller['id'] ?>">
                               <img class='item-catalog__bookimage' src="../static/books/<?php echo $bestseller['image'] ?>" alt="">
                            </a>
-                           <img class='item-catalog__favourite' src="../static/svg/favourite-empty.svg" alt="">
+                           <img id=<?php echo $bestseller['id'] ?> class='item-catalog__favourite' src="../static/svg/favourite-empty.svg" alt="">
                            <a class="item-catalog__title" href="/Test-Internet-Shop/pages/ProductPage.php?id=<?= $bestseller['id'] ?>">
                               <?php echo $bestseller['title']; ?>
                            </a>

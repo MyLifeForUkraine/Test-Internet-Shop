@@ -1,13 +1,19 @@
 /*------------------------------------------CATALOG----------------------------------------------*/
 .catalog {
    background-color: #e4e4e4;
-   display: flex;
-   flex-direction: column;
-   justify-content: center;
-   align-items: center;
+   /* display: flex;
+   flex-direction: column; */
+   /* justify-content: center;
+   align-items: center; */
    padding-bottom: 50px;
    /* border:2px solid red; */
    flex: 1 1 100%;
+}
+.catalog__empty{
+text-align: center;
+font-weight: 700;
+font-size: 40px;
+margin-top: 50px;
 }
 .catalog__title {
    font-weight: 500;
@@ -55,6 +61,7 @@
    transform:translate(-50%, -50%);
 }
 .item-catalog__favourite {
+   cursor:pointer;
    border-radius:10px;
    max-width: 30px;
    position: absolute;
