@@ -116,11 +116,13 @@ require '../includes/config.php';
             <div class="catalog">
                <?php
                //initialize $genres
+               $parametrs = '?';
                $genres = [];
                for ($i = 0; $i < 100; $i++) {
                   if ($_GET['isGenre' . $i]) {
                      // var_dump($_GET['isGenre' . $i]);
                      $genres[] = $_GET['isGenre' . $i];
+                     $parametrs .= 'isGenre' . $i . '=' . $_GET['isGenre' . $i] . '&';
                   }
                }
                //initialize $countries
@@ -129,6 +131,7 @@ require '../includes/config.php';
                   if ($_GET['isCountry' . $i]) {
                      // var_dump($_GET['isGenre' . $i]);
                      $countries[] = $_GET['isCountry' . $i];
+                     $parametrs .= 'isCountry' . $i . '=' . $_GET['isCountry' . $i] . '&';
                   }
                }
                //initialize $languages
@@ -137,6 +140,7 @@ require '../includes/config.php';
                   if ($_GET['isLanguage' . $i]) {
                      // var_dump($_GET['isGenre' . $i]);
                      $languages[] = $_GET['isLanguage' . $i];
+                     $parametrs .= 'isLanguage' . $i . '=' . $_GET['isLanguage' . $i] . '&';
                   }
                }
                $request = '';
@@ -187,8 +191,21 @@ require '../includes/config.php';
                if ($request != '') {
                   $condition = "WHERE " . $request;
                }
+
+               $currentPage = 1;
+               $perPage = 12;
+               if (isset($_GET['page'])) {
+                  $currentPage = (int) $_GET['page'];
+               }
+               $bestsellers_t = mysqli_query($connection, "SELECT COUNT('id') AS 'count_id' FROM `books` " . $condition);
+               $totalElements = mysqli_fetch_assoc($bestsellers_t)['count_id'];
+               $totalPages = ceil($totalElements / $perPage);
+               echo  $currentPage;
+               if ($currentPage < 1 || $currentPage > $totalPages) {
+                  $currentPage = 1;
+               }
                // echo "SELECT * FROM `books` " . $condition;
-               $bestsellers = mysqli_query($connection, "SELECT * FROM `books` " . $condition);
+               $bestsellers = mysqli_query($connection, "SELECT * FROM `books` " . $condition . "LIMIT " . $perPage . " OFFSET " . $perPage * ($currentPage - 1));
                if (mysqli_num_rows($bestsellers) == 0) {
                ?>
                   <div class="catalog__empty">
@@ -235,6 +252,28 @@ require '../includes/config.php';
                <?php
                }
                ?>
+               <div class="catalog__pagination">
+                  <?php if ($currentPage > 1) {
+                  ?>
+                     <a class="catalog__pagination-button" href="<?php echo $parametrs == '' ? '?' : $parametrs  ?>page=<?= $currentPage - 1 ?>"> Попередня сторінка</a>
+                  <?php } else {
+                  ?>
+                     <p class="catalog__pagination-button-notactive"> Попередня сторінка</p>
+                  <?php } ?>
+
+                  <p class="catalog__pagination-current-page"><?= $currentPage ?></p>
+                  <?php
+                  if ($currentPage * $perPage + 1 <= $totalElements) {
+                  ?>
+                     <a class="catalog__pagination-button" href="<?php echo $parametrs == '' ? '?' : $parametrs  ?>page=<?= $currentPage + 1 ?>"> Наступна сторінка</a>
+                  <?php
+                  } else { ?>
+                     <p class="catalog__pagination-button-notactive"> Наступна сторінка</p>
+                  <?php
+                  }
+                  ?>
+
+               </div>
             </div>
          </div>
 
