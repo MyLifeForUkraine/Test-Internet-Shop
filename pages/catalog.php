@@ -1,5 +1,13 @@
 <?php
 require '../includes/config.php';
+session_start();
+if ($_SESSION['user']['username']) {
+   $discount = 0.9;
+   $isaccess = 'yes';
+} else {
+   $discount = 1;
+   $isaccess = 'no';
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -144,6 +152,12 @@ require '../includes/config.php';
                   }
                }
                $request = '';
+               if ($isaccess === 'no') {
+                  $request .= "(isforeveryone = 'yes')";
+               }
+               if (count($genres) > 0 && $request != '') {
+                  $request .= " AND ";
+               }
                if (count($genres) > 0) {
                   $request .= "(";
                }
@@ -191,16 +205,17 @@ require '../includes/config.php';
                if ($request != '') {
                   $condition = "WHERE " . $request;
                }
-
+               // echo $condition;
                $currentPage = 1;
                $perPage = 12;
                if (isset($_GET['page'])) {
                   $currentPage = (int) $_GET['page'];
                }
-               $bestsellers_t = mysqli_query($connection, "SELECT COUNT('id') AS 'count_id' FROM `books` " . $condition);
+               // echo "SELECT COUNT('id') AS 'count_id' FROM `books`" . $condition;
+               $bestsellers_t = mysqli_query($connection, "SELECT COUNT('id') AS 'count_id' FROM `books`" . $condition);
                $totalElements = mysqli_fetch_assoc($bestsellers_t)['count_id'];
                $totalPages = ceil($totalElements / $perPage);
-               echo  $currentPage;
+               // echo  $currentPage;
                if ($currentPage < 1 || $currentPage > $totalPages) {
                   $currentPage = 1;
                }
@@ -233,7 +248,7 @@ require '../includes/config.php';
                                  <?php echo $bestseller['author']; ?>
                               </div>
                               <div class="item-catalog__price">
-                                 <?php echo $bestseller['price'] . ' грн'; ?>
+                                 <?php echo ceil($bestseller['price'] * $discount) . ' грн'; ?>
                               </div>
                               <div class="item-catalog__buttons">
                                  <a class="item-catalog__decription item-catalog__button" href="/Test-Internet-Shop/pages/ProductPage.php?id=<?= $bestseller['id'] ?>">

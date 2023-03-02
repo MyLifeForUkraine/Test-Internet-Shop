@@ -53,4 +53,8 @@ session_start();
          </a>
       </div>
    </div>
+   <?php
+
+   echo $_SESSION['user']['username'];
+   ?>
 </header>

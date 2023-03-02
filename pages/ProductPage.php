@@ -1,5 +1,13 @@
 <?php
 require '../includes/config.php';
+session_start();
+if ($_SESSION['user']['username']) {
+   $discount = 0.9;
+   $isaccess = 'yes';
+} else {
+   $discount = 1;
+   $isaccess = 'no';
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -21,6 +29,18 @@ require '../includes/config.php';
       <div class="container">
          <?php require '../includes/header.php'; ?>
          <div class="content">
+            <?php
+            if ($isaccess === 'no') {
+               $banned = mysqli_query($connection, "SELECT id FROM `books` WHERE isforeveryone = 'no' ");
+               $currentID = $_GET['id'];
+               // echo $currentID;
+               while ($id = mysqli_fetch_assoc($banned)) {
+                  if ($currentID == $id['id']) {
+                     header('Location: /Test-Internet-Shop/pages/catalog.php');
+                  }
+               }
+            }
+            ?>
             <div class="about-product">
                <?php $product = mysqli_fetch_assoc(mysqli_query($connection, "SELECT * FROM `books` WHERE id=" . (int)$_GET['id'])); ?>
                <div class="about-product__control">
@@ -107,7 +127,7 @@ require '../includes/config.php';
                   </div>
                   <div class="info-about-product__money">
                      <div class="info-about-product__price">
-                        <?php echo $product['price'] . ' грн' ?>
+                        <?php echo ceil($product['price'] * $discount) . ' грн' ?>
                      </div>
                      <?php
                      if ($product['count'] > 0) {
@@ -129,7 +149,13 @@ require '../includes/config.php';
             </div>
             <div class="catalog">
                <?php
-               $bestsellers = mysqli_query($connection, "SELECT * FROM `books` WHERE country = " . $product['country']);
+               if ($isaccess === 'no') {
+                  $request = "(isforeveryone = 'yes') AND ";
+               } else {
+                  $request = '';
+               }
+               // echo "SELECT * FROM `books` WHERE" . $request . "  country = " . $product['country'];
+               $bestsellers = mysqli_query($connection, "SELECT * FROM `books` WHERE " . $request . " country = " . $product['country']);
                ?>
                <div class="catalog__title">
                   Книги, які можуть Вас зацікавити
@@ -151,7 +177,7 @@ require '../includes/config.php';
                               <?php echo $bestseller['author']; ?>
                            </div>
                            <div class="item-catalog__price">
-                              <?php echo $bestseller['price'] . ' грн'; ?>
+                              <?php echo ceil($bestseller['price'] * $discount) . ' грн'; ?>
                            </div>
                            <div class="item-catalog__buttons">
                               <a class="item-catalog__decription item-catalog__button" href="">

@@ -1,5 +1,13 @@
 <?php
 require '../includes/config.php';
+session_start();
+if ($_SESSION['user']['username']) {
+   $discount = 0.9;
+   $isaccess = 'yes';
+} else {
+   $discount = 1;
+   $isaccess = 'no';
+}
 ?>
 
 <!DOCTYPE html>
@@ -22,7 +30,11 @@ require '../includes/config.php';
          <?php require '../includes/header.php'; ?>
          <div class="bestsellers">
             <?php
-            $bestsellers = mysqli_query($connection, "SELECT * FROM `books` ORDER BY `sold_count` DESC LIMIT 12");
+            if ($isaccess === 'no') {
+               $additionalParametr = ' WHERE isforeveryone = "yes" ';
+            }
+            // echo "SELECT * FROM `books`" . $additionalParametr . " ORDER BY `sold_count` DESC LIMIT 12";
+            $bestsellers = mysqli_query($connection, "SELECT * FROM `books`" . $additionalParametr . " ORDER BY `sold_count` DESC LIMIT 12");
             ?>
             <div class="bestsellers__title">
                Найбільш популярні книги
@@ -44,7 +56,7 @@ require '../includes/config.php';
                            <?php echo $bestseller['author']; ?>
                         </div>
                         <div class="item-bestsellers__price">
-                           <?php echo $bestseller['price'] . ' грн'; ?>
+                           <?php echo ceil($bestseller['price'] * $discount) . ' грн'; ?>
                         </div>
                         <div class="item-bestsellers__buttons">
                            <a class="item-bestsellers__decription item-bestsellers__button" href="/Test-Internet-Shop/pages/ProductPage.php?id=<?= $bestseller['id'] ?>">
