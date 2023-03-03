@@ -12,11 +12,10 @@ if ($_SESSION['user']['username']) {
       $_SESSION['currentFavourites'] = [];
    }
    if (!$_SESSION['currentBasket']) {
-      $_SESSION['currentBasket'] = [];
+      $_SESSION['currentBasket'] = array();
    }
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -32,11 +31,9 @@ if ($_SESSION['user']['username']) {
 </head>
 
 <body>
-
    <div class="wrapper">
       <div class="container">
          <?php require '../includes/header.php'; ?>
-
          <div class="content">
             <?php
             if ($isaccess === 'no') {
@@ -272,10 +269,10 @@ if ($_SESSION['user']['username']) {
          $('.item-bestsellers__buy, .item-catalog__buy').on('click', function(event) {
             let id = event.target.id;
             id = Number(id.slice(6));
-            // console.log(id);
+            console.log(id);
             $.ajax({
                method: 'POST',
-               url: '../handlers/basketHandler.php',
+               url: '../handlers/basketAddHandler.php',
                data: {
                   id: id,
                },

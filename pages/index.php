@@ -12,7 +12,7 @@ if ($_SESSION['user']['username']) {
       $_SESSION['currentFavourites'] = [];
    }
    if (!$_SESSION['currentBasket']) {
-      $_SESSION['currentBasket'] = [];
+      $_SESSION['currentBasket'] = array();
    }
 }
 ?>
@@ -37,7 +37,11 @@ if ($_SESSION['user']['username']) {
 
          <?php
          // print_r($_SESSION['currentFavourites']);
-         print_r($_SESSION['currentBasket']);
+         // print_r($_SESSION['currentBasket']);
+         // echo '<pre>';
+         // // print_r($newCurrentBasket);
+         // print_r($_SESSION['currentBasket']);
+         // echo '</pre>';
          ?>
          <?php require '../includes/header.php'; ?>
          <div class="bestsellers">
@@ -144,9 +148,10 @@ if ($_SESSION['user']['username']) {
          $('.item-bestsellers__buy').on('click', function(event) {
             let id = event.target.id;
             id = Number(id.slice(6));
+
             $.ajax({
                method: 'POST',
-               url: '../handlers/basketHandler.php',
+               url: '../handlers/basketAddHandler.php',
                data: {
                   id: id,
                },

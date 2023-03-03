@@ -12,7 +12,7 @@ if ($_SESSION['user']['username']) {
       $_SESSION['currentFavourites'] = [];
    }
    if (!$_SESSION['currentBasket']) {
-      $_SESSION['currentBasket'] = [];
+      $_SESSION['currentBasket'] = array();
    }
 }
 ?>
@@ -132,7 +132,7 @@ if ($_SESSION['user']['username']) {
             <div class="catalog">
                <?php
                // print_r($_SESSION['currentFavourites']);
-               print_r($_SESSION['currentBasket']);
+               // print_r($_SESSION['currentBasket']);
                ?>
                <?php
 
@@ -360,7 +360,7 @@ if ($_SESSION['user']['username']) {
             id = Number(id.slice(6));
             $.ajax({
                method: 'POST',
-               url: '../handlers/basketHandler.php',
+               url: '../handlers/basketAddHandler.php',
                data: {
                   id: id,
                },
