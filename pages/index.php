@@ -33,7 +33,7 @@ if ($_SESSION['user']['username']) {
       <div class="container">
 
          <?php
-         // print_r($_SESSION['currentFavourites']); 
+         print_r($_SESSION['currentFavourites']);
          ?>
          <?php require '../includes/header.php'; ?>
          <div class="bestsellers">

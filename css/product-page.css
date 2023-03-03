@@ -74,6 +74,15 @@
 }
 .isInStock-info-about-product {
 }
+.item-catalog__favourite {
+   cursor:pointer;
+   border-radius:10px;
+   max-width: 30px;
+   position: absolute;
+   top:7%;
+   right:0%;
+   transform:translate(-20%,0%);
+}
 .isInStock-info-about-product__true {
 background-color: #77ed16;
 font-weight: 600;

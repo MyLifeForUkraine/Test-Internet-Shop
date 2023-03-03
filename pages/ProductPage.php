@@ -4,11 +4,16 @@ session_start();
 if ($_SESSION['user']['username']) {
    $discount = 0.9;
    $isaccess = 'yes';
+   // $_SESSION['currentFavourites'] = $SESS;
 } else {
    $discount = 1;
    $isaccess = 'no';
+   if (!$_SESSION['currentFavourites']) {
+      $_SESSION['currentFavourites'] = [];
+   }
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -48,9 +53,17 @@ if ($_SESSION['user']['username']) {
                      <img src="../static/books/<?php echo $product['image'] ?>" alt="">
                   </div>
                   <div class="about-product__buttons">
-                     <a class="about-product__button" href="">
-                        <img src="../static/svg/favourite-empty.svg" alt="">
-                     </a>
+                     <?php
+                     if (in_array($product['id'], $_SESSION['currentFavourites'])) {
+                     ?>
+                        <img id="favourite<?php echo $product['id'] ?>" class='item-bestsellers__favourite about-product__button' src="../static/svg/favourite.svg" alt="">
+                     <?php
+                     } else {
+                     ?>
+                        <img id="favourite<?php echo $product['id'] ?>" class='item-bestsellers__favourite about-product__button' src="../static/svg/favourite-empty.svg" alt="">
+                     <?php
+                     }
+                     ?>
                      <a class="about-product__button" href="">
                         <img src="../static/svg/basket.svg" alt="">
                      </a>
@@ -155,7 +168,8 @@ if ($_SESSION['user']['username']) {
                   $request = '';
                }
                // echo "SELECT * FROM `books` WHERE" . $request . "  country = " . $product['country'];
-               $bestsellers = mysqli_query($connection, "SELECT * FROM `books` WHERE " . $request . " country = " . $product['country']);
+               // echo "SELECT * FROM `books` WHERE id != " . $_GET['id'] . " AND " . $request . " country = " . $product['country'];
+               $bestsellers = mysqli_query($connection, "SELECT * FROM `books` WHERE id != " . $_GET['id'] . " AND " . $request . " country = " . $product['country']);
                ?>
                <div class="catalog__title">
                   Книги, які можуть Вас зацікавити
@@ -169,7 +183,17 @@ if ($_SESSION['user']['username']) {
                            <a href="/Test-Internet-Shop/pages/ProductPage.php?id=<?= $bestseller['id'] ?>">
                               <img class='item-catalog__bookimage' src="../static/books/<?php echo $bestseller['image'] ?>" alt="">
                            </a>
-                           <img id=<?php echo $bestseller['id'] ?> class='item-catalog__favourite' src="../static/svg/favourite-empty.svg" alt="">
+                           <?php
+                           if (in_array($bestseller['id'], $_SESSION['currentFavourites'])) {
+                           ?>
+                              <img id="favourite<?php echo $bestseller['id'] ?>" class='item-catalog__favourite ' src="../static/svg/favourite.svg" alt="">
+                           <?php
+                           } else {
+                           ?>
+                              <img id="favourite<?php echo $bestseller['id'] ?>" class='item-catalog__favourite ' src="../static/svg/favourite-empty.svg" alt="">
+                           <?php
+                           }
+                           ?>
                            <a class="item-catalog__title" href="/Test-Internet-Shop/pages/ProductPage.php?id=<?= $bestseller['id'] ?>">
                               <?php echo $bestseller['title']; ?>
                            </a>
@@ -202,6 +226,40 @@ if ($_SESSION['user']['username']) {
       </div>
    </div>
    <script src="../js/index.js"></script>
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+   <script>
+      $(document).ready(function() {
+         $('.item-catalog__favourite, .item-bestsellers__favourite').on('click', function(event) {
+            // console.log(event.target);
+            // console.log(event.target.getAttribute('src'));
+            if (event.target.getAttribute('src').includes('empty')) {
+               event.target.setAttribute('src', '../static/svg/favourite.svg')
+            } else {
+               event.target.setAttribute('src', '../static/svg/favourite-empty.svg')
+            }
+
+            let id = event.target.id;
+            id = Number(id.slice(9));
+            console.log(event.target);
+            $.ajax({
+               method: 'POST',
+               url: '../handlers/favouriteHandler.php',
+               // isGenre
+               data: {
+                  id: id,
+               },
+               success: function(response) {
+                  console.log(response);
+               },
+               error: function(xhr, status, error) {
+                  console.log(error);
+               }
+            });
+            // console.log(event.target.id);
+            // console.log(id);
+         })
+      });
+   </script>
 </body>
 
 </html>

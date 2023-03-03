@@ -4,10 +4,15 @@ session_start();
 if ($_SESSION['user']['username']) {
    $discount = 0.9;
    $isaccess = 'yes';
+   // $_SESSION['currentFavourites'] = $SESS;
 } else {
    $discount = 1;
    $isaccess = 'no';
+   if (!$_SESSION['currentFavourites']) {
+      $_SESSION['currentFavourites'] = [];
+   }
 }
+// print_r($_SESSION['currentFavourites']);
 ?>
 
 <!DOCTYPE html>
@@ -40,11 +45,17 @@ if ($_SESSION['user']['username']) {
                $additionalParametr = '';
             }
             // echo ;
-            if ($_SESSION['user']['username']) {
-               $favourites = $_SESSION['currentFavourites'];
-            } else {
-               $favourites = [1, 4, 5];
-            }
+            // if ($_SESSION['user']['username']) {
+            //    $favourites = $_SESSION['currentFavourites'];
+            // } else {
+            //    $favourites = [1, 4, 5];
+            // }
+            // if (!$_SESSION['currentFavourites']) {
+            //    $favourites = $_SESSION['currentFavourites'] = [];
+            // } else {
+
+            // }
+            $favourites = $_SESSION['currentFavourites'];
             if ($additionalParametr !== '' && count($favourites) !== 0) {
                $favouritesParametr = ' AND (';
             } else if (count($favourites) !== 0) {
@@ -62,8 +73,8 @@ if ($_SESSION['user']['username']) {
             if (count($favourites) !== 0) {
                $favouritesParametr .= ')';
             }
-            echo $favouritesParametr;
-            echo "SELECT * FROM `books`" . $additionalParametr . $favouritesParametr;
+            // echo $favouritesParametr;
+            // echo "SELECT * FROM `books`" . $additionalParametr . $favouritesParametr;
             // echo $favouritesParametr;
             if ($favouritesParametr !== '') {
                $bestsellers = mysqli_query($connection, "SELECT * FROM `books`" . $additionalParametr . $favouritesParametr);
@@ -80,7 +91,17 @@ if ($_SESSION['user']['username']) {
                            <a href="/Test-Internet-Shop/pages/ProductPage.php?id=<?= $bestseller['id'] ?>">
                               <img class='item-bestsellers__bookimage' src="../static/books/<?php echo $bestseller['image'] ?>" alt="">
                            </a>
-                           <img id=<?php echo $bestseller['id'] ?> class='item-bestsellers__favourite' src="../static/svg/favourite-empty.svg" alt="">
+                           <?php
+                           if (in_array($bestseller['id'], $_SESSION['currentFavourites'])) {
+                           ?>
+                              <img id="favourite<?php echo $bestseller['id'] ?>" class='item-bestsellers__favourite' src="../static/svg/favourite.svg" alt="">
+                           <?php
+                           } else {
+                           ?>
+                              <img id="favourite<?php echo $bestseller['id'] ?>" class='item-bestsellers__favourite' src="../static/svg/favourite-empty.svg" alt="">
+                           <?php
+                           }
+                           ?>
                            <a class="item-bestsellers__title" href="/Test-Internet-Shop/pages/ProductPage.php?id=<?= $bestseller['id'] ?>">
                               <?php echo $bestseller['title']; ?>
                            </a>
@@ -121,6 +142,39 @@ if ($_SESSION['user']['username']) {
       </div>
    </div>
    <script src='../js/index.js'></script>
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+   <script>
+      $(document).ready(function() {
+         $('.item-bestsellers__favourite').on('click', function(event) {
+            // console.log(event.target);
+            // console.log(event.target.getAttribute('src'));
+            if (event.target.getAttribute('src').includes('empty')) {
+               event.target.setAttribute('src', '../static/svg/favourite.svg')
+            } else {
+               event.target.setAttribute('src', '../static/svg/favourite-empty.svg')
+            }
+
+            let id = event.target.id;
+            id = Number(id.slice(9));
+            $.ajax({
+               method: 'POST',
+               url: '../handlers/favouriteHandler.php',
+               // isGenre
+               data: {
+                  id: id,
+               },
+               success: function(response) {
+                  console.log(response);
+               },
+               error: function(xhr, status, error) {
+                  console.log(error);
+               }
+            });
+            // console.log(event.target.id);
+            // console.log(id);
+         })
+      });
+   </script>
 </body>
 
 </html>
