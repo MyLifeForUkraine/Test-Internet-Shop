@@ -62,7 +62,7 @@ if ($_SESSION['user']['username']) {
                ?>
                   <div class="bestsellers__item item-bestsellers">
                      <div class="item-bestsellers__body">
-                        <a href="/Test-Internet-Shop/pages/ProductPage.php?id=<?= $bestseller['id'] ?>">
+                        <a href="../pages/ProductPage.php?id=<?= $bestseller['id'] ?>">
                            <img class='item-bestsellers__bookimage' src="../static/books/<?php echo $bestseller['image'] ?>" alt="">
                         </a>
                         <?php
@@ -76,7 +76,7 @@ if ($_SESSION['user']['username']) {
                         <?php
                         }
                         ?>
-                        <a class="item-bestsellers__title" href="/Test-Internet-Shop/pages/ProductPage.php?id=<?= $bestseller['id'] ?>">
+                        <a class="item-bestsellers__title" href="../pages/ProductPage.php?id=<?= $bestseller['id'] ?>">
                            <?php echo $bestseller['title']; ?>
                         </a>
                         <div class="item-bestsellers__author">
@@ -86,7 +86,7 @@ if ($_SESSION['user']['username']) {
                            <?php echo ceil($bestseller['price'] * $discount) . ' грн'; ?>
                         </div>
                         <div class="item-bestsellers__buttons">
-                           <a class="item-bestsellers__decription item-bestsellers__button" href="/Test-Internet-Shop/pages/ProductPage.php?id=<?= $bestseller['id'] ?>">
+                           <a class="item-bestsellers__decription item-bestsellers__button" href="../pages/ProductPage.php?id=<?= $bestseller['id'] ?>">
                               Опис
                            </a>
                            <div id="basket<?php echo $bestseller['id'] ?>" class="item-bestsellers__buy item-bestsellers__button">
@@ -99,8 +99,8 @@ if ($_SESSION['user']['username']) {
                }
                ?>
             </div>
-            <a class="bestsellers__button" href="/Test-Internet-Shop/pages/catalog.php">
-               <!-- <a class="bestsellers__link" href="/Test-Internet-Shop/pages/catalog.php"> -->
+            <a class="bestsellers__button" href="../pages/catalog.php">
+               <!-- <a class="bestsellers__link" href="../pages/catalog.php"> -->
                Catalog
                <!-- </a> -->
             </a>

@@ -17,16 +17,16 @@
       <div class="footer__navigation navigation-footer">
          <ul class="navigation-footer__list">
             <li class="navigation-footer__item item-navigation-footer">
-               <a class="item-navigation-footer__link" href="/Test-Internet-Shop/pages/index.php">Головна</a>
+               <a class="item-navigation-footer__link" href="../pages/index.php">Головна</a>
             </li>
             <li class="navigation-footer__item item-navigation-footer">
-               <a class="item-navigation-footer__link" href="/Test-Internet-Shop/pages/catalog.php">Каталог</a>
+               <a class="item-navigation-footer__link" href="../pages/catalog.php">Каталог</a>
             </li>
             <li class="navigation-footer__item item-navigation-footer">
-               <a class="item-navigation-footer__link" href="/Test-Internet-Shop/pages/favourite.php">Бажані</a>
+               <a class="item-navigation-footer__link" href="../pages/favourite.php">Бажані</a>
             </li>
             <li class="navigation-footer__item item-navigation-footer">
-               <a class="item-navigation-footer__link" href="/Test-Internet-Shop/pages/basket.php">Корзина</a>
+               <a class="item-navigation-footer__link" href="../pages/basket.php">Корзина</a>
             </li>
          </ul>
       </div>

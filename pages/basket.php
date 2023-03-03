@@ -37,7 +37,9 @@ if ($_SESSION['user']['username']) {
       <div class="container">
          <?php require '../includes/header.php'; ?>
          <?php
+         // echo '<pre>';
          // print_r($_SESSION['currentBasket']);
+         // echo '</pre>';
          if (count($_SESSION['currentBasket']) > 0) {
             $request = 'WHERE (';
          } else {
@@ -70,11 +72,11 @@ if ($_SESSION['user']['username']) {
                      ?>
                         <div class=" goods-content__item item-goods-content item<?= $good['id'] ?> ">
 
-                           <a href="/Test-Internet-Shop/pages/ProductPage.php?id=<?= $good['id'] ?>" class="item-goods-content__img">
+                           <a href="../pages/ProductPage.php?id=<?= $good['id'] ?>" class="item-goods-content__img">
                               <img src="../static/books/<?= $good['image'] ?>" alt="">
                            </a>
                            <div class="item-goods-content__info info-item-goods-content">
-                              <a href="/Test-Internet-Shop/pages/ProductPage.php?id=<?= $good['id'] ?>" class="info-item-goods-content__title">
+                              <a href="../pages/ProductPage.php?id=<?= $good['id'] ?>" class="info-item-goods-content__title">
                                  <?= $good['title'] ?>
                               </a>
                               <div class="info-item-goods-content__author">

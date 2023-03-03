@@ -72,7 +72,7 @@ if (mysqli_num_rows($check_user) > 0) {
    $_SESSION['currentFavourites'] = $favourites;
    $_SESSION['currentBasket'] = $basket;
 
-   header('Location: /Test-Internet-Shop/pages/index.php');
+   header('Location: ../pages/index.php');
 } else {
    $_SESSION['message'] = 'Не вірний логін чи пароль';
    header('Location: authorization.php');

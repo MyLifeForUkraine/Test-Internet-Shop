@@ -42,7 +42,7 @@ if ($_SESSION['user']['username']) {
                // echo $currentID;
                while ($id = mysqli_fetch_assoc($banned)) {
                   if ($currentID == $id['id']) {
-                     header('Location: /Test-Internet-Shop/pages/catalog.php');
+                     header('Location: ../pages/catalog.php');
                   }
                }
             }
@@ -163,7 +163,7 @@ if ($_SESSION['user']['username']) {
             <div class="catalog">
                <?php
                // print_r($_SESSION['currentFavourites']);
-               print_r($_SESSION['currentBasket']);
+               // print_r($_SESSION['currentBasket']);
                ?>
                <?php
                if ($isaccess === 'no') {
@@ -184,7 +184,7 @@ if ($_SESSION['user']['username']) {
                   ?>
                      <div class="catalog__item item-catalog">
                         <div class="item-catalog__body">
-                           <a href="/Test-Internet-Shop/pages/ProductPage.php?id=<?= $bestseller['id'] ?>">
+                           <a href="../pages/ProductPage.php?id=<?= $bestseller['id'] ?>">
                               <img class='item-catalog__bookimage' src="../static/books/<?php echo $bestseller['image'] ?>" alt="">
                            </a>
                            <?php
@@ -198,7 +198,7 @@ if ($_SESSION['user']['username']) {
                            <?php
                            }
                            ?>
-                           <a class="item-catalog__title" href="/Test-Internet-Shop/pages/ProductPage.php?id=<?= $bestseller['id'] ?>">
+                           <a class="item-catalog__title" href="../pages/ProductPage.php?id=<?= $bestseller['id'] ?>">
                               <?php echo $bestseller['title']; ?>
                            </a>
                            <div class="item-catalog__author">
@@ -221,7 +221,7 @@ if ($_SESSION['user']['username']) {
                   }
                   ?>
                </div>
-               <!-- <a class="catalog__button" href="/Test-Internet-Shop/pages/catalog.php">
+               <!-- <a class="catalog__button" href="../pages/catalog.php">
                   Catalog
                </a> -->
             </div>
