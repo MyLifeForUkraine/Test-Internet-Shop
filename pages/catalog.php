@@ -264,31 +264,32 @@ if ($_SESSION['user']['username']) {
                      }
                      ?>
                   </div>
+                  <div class="catalog__pagination">
+                     <?php if ($currentPage > 1) {
+                     ?>
+                        <a class="catalog__pagination-button" href="<?php echo $parametrs == '' ? '?' : $parametrs  ?>page=<?= $currentPage - 1 ?>"> Попередня сторінка</a>
+                     <?php } else {
+                     ?>
+                        <p class="catalog__pagination-button-notactive"> Попередня сторінка</p>
+                     <?php } ?>
+
+                     <p class="catalog__pagination-current-page"><?= $currentPage ?></p>
+                     <?php
+                     if ($currentPage * $perPage + 1 <= $totalElements) {
+                     ?>
+                        <a class="catalog__pagination-button" href="<?php echo $parametrs == '' ? '?' : $parametrs  ?>page=<?= $currentPage + 1 ?>"> Наступна сторінка</a>
+                     <?php
+                     } else { ?>
+                        <p class="catalog__pagination-button-notactive"> Наступна сторінка</p>
+                     <?php
+                     }
+                     ?>
+
+                  </div>
                <?php
                }
                ?>
-               <div class="catalog__pagination">
-                  <?php if ($currentPage > 1) {
-                  ?>
-                     <a class="catalog__pagination-button" href="<?php echo $parametrs == '' ? '?' : $parametrs  ?>page=<?= $currentPage - 1 ?>"> Попередня сторінка</a>
-                  <?php } else {
-                  ?>
-                     <p class="catalog__pagination-button-notactive"> Попередня сторінка</p>
-                  <?php } ?>
 
-                  <p class="catalog__pagination-current-page"><?= $currentPage ?></p>
-                  <?php
-                  if ($currentPage * $perPage + 1 <= $totalElements) {
-                  ?>
-                     <a class="catalog__pagination-button" href="<?php echo $parametrs == '' ? '?' : $parametrs  ?>page=<?= $currentPage + 1 ?>"> Наступна сторінка</a>
-                  <?php
-                  } else { ?>
-                     <p class="catalog__pagination-button-notactive"> Наступна сторінка</p>
-                  <?php
-                  }
-                  ?>
-
-               </div>
             </div>
          </div>
 

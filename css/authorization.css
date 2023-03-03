@@ -1,34 +1,23 @@
 @import url('zero.css');
 /*------------------------------AUTHORIZATION------------------------------*/
-body{
-   height: 100vh;
-   /* border:2px solid black; */
-}
 .wrapper-authorization {
    font-family: 'Montserrat';
    background-color: #e4e4e4;
-   /* height: 100vh;
-   display: flex;
-   flex-direction: column; */
+
 }
 .container-authorization {
+   min-height: 100vh;
+   display: flex;
+   flex-direction: column;
 
 }
 .content-authorization{
-   height: 100vh;
+   flex: 1 1 auto;
    display: flex;
-   align-items: center;
    justify-content: center;
-   /* border:2px solid green; */
-   /* flex: 1 1 auto; */
-   margin-top: -150px;
+   align-items: center;
 }
-/* header{
-   border:2px solid red;
-} */
-.footer{
-   margin-top: -20px;
-}
+
 .a {
    color: #7c9ab7;
    font-weight: bold;

@@ -24,6 +24,17 @@ session_start();
          </a>
       </div>
       <?php
+      if ($_SESSION['user']['role'] === 'admin') {
+      ?>
+         <div class="header__page">
+            <a href="/Test-Internet-Shop/pages/AdminPage.php" class="header__link-to-page">
+               Адмінка
+            </a>
+         </div>
+      <?php
+      }
+      ?>
+      <?php
       if ($_SESSION['user']) {
       ?>
          <div class="header__page">
@@ -55,6 +66,6 @@ session_start();
    </div>
    <?php
 
-   echo $_SESSION['user']['username'];
+   echo $_SESSION['user']['role'];
    ?>
 </header>

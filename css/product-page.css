@@ -26,6 +26,10 @@
 .about-product__image {
    margin-bottom: 20px;
 }
+.about-product__image img{
+   max-width: 180px;
+   /* border: 2px solid red; */
+}
 .about-product__buttons {
    /* border:2px solid white; */
    display: flex;
