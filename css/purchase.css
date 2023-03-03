@@ -1,0 +1,23 @@
+@import url('zero.css');
+@import url('header.css');
+@import url('footer.css');
+.wrapper {
+   font-family: 'Montserrat';
+}
+.container {
+   min-height: 100vh;
+   display: flex;
+   flex-direction: column;
+}
+.content {
+flex: 1 1 100%;
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+}
+.content__text {
+   font-weight: 700;
+   font-size: 40px;
+   color: #000000;
+}
