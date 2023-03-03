@@ -66,8 +66,63 @@ if ($_SESSION['user']['username']) {
                   </div>
 
                </div>
-               <div class="main__users main__area">
-                  users
+               <div class="main__users main__area users-main">
+                  <div class="users-main__title">
+                     Усі зареєстровані користувачі
+                  </div>
+                  <?php
+                  $users = mysqli_query($connection, "SELECT * FROM `users`");
+                  ?>
+                  <div class="users-main__body">
+                     <div class="users-main__item">
+                        <div class="users-main__id users-main__text">
+                           ID
+                        </div>
+                        <div class="users-main__username users-main__text">
+                           Username
+                        </div>
+                        <div class="users-main__email users-main__text">
+                           Email
+                        </div>
+                        <div class="users-main__role users-main__text">
+                           Role
+                        </div>
+                        <div class="users-main__favourite users-main__text">
+                           favourite
+                        </div>
+                        <div class="users-main__basket users-main__text">
+                           basket
+                        </div>
+                     </div>
+                     <?php
+                     while ($user = mysqli_fetch_assoc($users)) {
+                     ?>
+                        <div class="users-main__item">
+                           <div class="users-main__id users-main__text">
+                              <?= $user['id'] ?>
+                           </div>
+                           <div class="users-main__username users-main__text">
+                              <?= $user['username'] ?>
+                           </div>
+                           <div class="users-main__email users-main__text">
+                              <?= $user['email'] ?>
+                           </div>
+                           <div class="users-main__role users-main__text">
+                              <?= $user['role'] ?>
+                           </div>
+                           <div class="users-main__favourite users-main__text">
+                              <?= $user['favourite'] ?>
+                           </div>
+                           <div class="users-main__basket users-main__text">
+                              <?= $user['basket'] ?>
+                           </div>
+                        </div>
+                     <?php
+                     }
+                     ?>
+
+                  </div>
+
                </div>
                <div class="main__books main__area">
                   <div class="main__books-title">
@@ -102,7 +157,104 @@ if ($_SESSION['user']['username']) {
                   </form>
                </div>
                <div class="main__orders main__area">
-                  Orders
+                  <div class="orders-main__title">
+                     Усі заявки
+                  </div>
+                  <?php
+                  $orders = mysqli_query($connection, "SELECT * FROM `orders`");
+                  ?>
+                  <div class="orders-main__body">
+                     <div class="orders-main__item">
+                        <div class="orders-main__id orders-main__text">
+                           ID
+                        </div>
+                        <div class="orders-main__lastname orders-main__text">
+                           Lastname
+                        </div>
+                        <div class="orders-main__firstname orders-main__text">
+                           Firstname
+                        </div>
+                        <div class="orders-main__patronymic orders-main__text">
+                           Patronymic
+                        </div>
+                        <div class="orders-main__email orders-main__text">
+                           Email
+                        </div>
+                        <div class="orders-main__phone orders-main__text">
+                           Phone
+                        </div>
+                        <div class="orders-main__region orders-main__text">
+                           Region
+                        </div>
+                        <div class="orders-main__settlement orders-main__text">
+                           Settlement
+                        </div>
+                        <div class="orders-main__street orders-main__text">
+                           Street
+                        </div>
+                        <div class="orders-main__home orders-main__text">
+                           Home
+                        </div>
+                        <div class="orders-main__bid orders-main__text">
+                           Bid
+                        </div>
+                        <div class="orders-main__posttype orders-main__text">
+                           Posttype
+                        </div>
+                        <div class="orders-main__price orders-main__text">
+                           Price
+                        </div>
+                     </div>
+                     <?php
+                     while ($order = mysqli_fetch_assoc($orders)) {
+                     ?>
+                        <div class="orders-main__item">
+                           <div class="orders-main__id orders-main__text">
+                              <?= $order['id'] ?>
+                           </div>
+                           <div class="orders-main__lastname orders-main__text">
+                              <?= $order['lastname'] ?>
+                           </div>
+                           <div class="orders-main__firstname orders-main__text">
+                              <?= $order['firstname'] ?>
+                           </div>
+                           <div class="orders-main__patronymic orders-main__text">
+                              <?= $order['patronymic'] ?>
+                           </div>
+                           <div class="orders-main__email orders-main__text">
+                              <?= $order['email'] ?>
+                           </div>
+                           <div class="orders-main__phone orders-main__text">
+                              <?= $order['phone'] ?>
+                           </div>
+                           <div class="orders-main__region orders-main__text">
+                              <?= $order['region'] ?>
+                           </div>
+                           <div class="orders-main__settlement orders-main__text">
+                              <?= $order['settlement'] ?>
+                           </div>
+                           <div class="orders-main__street orders-main__text">
+                              <?= $order['street'] ?>
+                           </div>
+                           <div class="orders-main__home orders-main__text">
+                              <?= $order['home'] ?>
+                           </div>
+                           <div class="orders-main__bid orders-main__text">
+                              <?= $order['bid'] ?>
+                           </div>
+                           <div class="orders-main__posttype orders-main__text">
+                              <?= $order['posttype'] ?>
+                           </div>
+                           <div class="orders-main__price orders-main__text">
+                              <?= $order['price'] ?>
+                           </div>
+                        </div>
+                     <?php
+                     }
+                     ?>
+
+                  </div>
+
                </div>
             </div>
          </div>
