@@ -25,6 +25,9 @@ if ($_SESSION['user']['username']) {
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <title>Document</title>
    <link rel="stylesheet" href="../css/basket.css">
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -101,20 +104,32 @@ if ($_SESSION['user']['username']) {
                   <div class="goods-content__total">
                      <?= $totalSum ?>
                   </div>
+                  <?php $_SESSION['total-price'] = $totalSum ?>
                   <span class="currency">грн </span>
                </div>
                <div class="content__form form-content">
                   <form action="../users/order.php" method="post" class="form-content__form">
                      <label class="form-content__label">Прізвище</label>
-                     <input type="text" name="lastname" class="form-content__input" placeholder="Введіть Ваше прізвище">
+                     <input required type="text" name="lastname" class="form-content__input" placeholder="Введіть Ваше прізвище">
                      <label class="form-content__label">Ім'я</label>
-                     <input type="text" name="firstname" class="form-content__input" placeholder="Введіть Ваше ім'я">
+                     <input required type="text" name="firstname" class="form-content__input" placeholder="Введіть Ваше ім'я">
                      <label class="form-content__label">По-батькові</label>
-                     <input type="text" name="patronymic" class="form-content__input" placeholder="Введіть Ваше по-батькові">
+                     <input required type="text" name="patronymic" class="form-content__input" placeholder="Введіть Ваше по-батькові">
                      <label class="form-content__label">Пошта</label>
-                     <input type="email" name="email" class="form-content__input" placeholder="Введіть адресу Вашої пошти">
+                     <input required type="email" name="email" class="form-content__input" placeholder="Введіть адресу Вашої пошти">
                      <label class="form-content__label">Номер телефону</label>
-                     <input type="phone" name="phone" class="form-content__input" placeholder="Введіть Ваш номер телефону">
+                     <input required type="phone" name="phone" class="form-content__input" placeholder="Введіть Ваш номер телефону">
+                     <label class="form-content__label">Тип доставки</label>
+                     <p class="form-content__radio"><input checked type="radio" name="posttype" value="nova_poshta"> Нова Пошта </p>
+                     <p class="form-content__radio"><input type="radio" name="posttype" value="ukr_poshta"> Укр Пошта </p>
+                     <label class="form-content__label">Область</label>
+                     <input required type="text" name="region" class="form-content__input" placeholder="Введіть область Вашого населеного пункту">
+                     <label class="form-content__label">Населений пункт</label>
+                     <input required type="text" name="settlement" class="form-content__input" placeholder="Введіть назву Вашого населеного пункту">
+                     <label class="form-content__label">Вулиця</label>
+                     <input required type="text" name="street" class="form-content__input" placeholder="Введіть назву Вашої вулиці">
+                     <label class="form-content__label">Номер будинку</label>
+                     <input required type="text" name="home" class="form-content__input" placeholder="Введіть номер Вашого будинку">
                      <button type="submit" class="form-content__button">Замовити</button>
                   </form>
                </div>

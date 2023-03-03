@@ -11,10 +11,11 @@ if ($_SESSION['user']['username']) {
    if (!$_SESSION['currentFavourites']) {
       $_SESSION['currentFavourites'] = [];
    }
+   if (!$_SESSION['currentBasket']) {
+      $_SESSION['currentBasket'] = array();
+   }
 }
-// print_r($_SESSION['currentFavourites']);
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -115,9 +116,9 @@ if ($_SESSION['user']['username']) {
                               <a class="item-bestsellers__decription item-bestsellers__button" href="/Test-Internet-Shop/pages/ProductPage.php?id=<?= $bestseller['id'] ?>">
                                  Опис
                               </a>
-                              <a class="item-bestsellers__buy item-bestsellers__button" href="">
+                              <div id="basket<?php echo $bestseller['id'] ?>" class="item-bestsellers__buy item-bestsellers__button">
                                  У кошик
-                              </a>
+                              </div>
                            </div>
                         </div>
                      </div>
@@ -172,6 +173,28 @@ if ($_SESSION['user']['username']) {
             });
             // console.log(event.target.id);
             // console.log(id);
+         })
+      });
+   </script>
+   <script>
+      $(document).ready(function() {
+         $('.item-bestsellers__buy').on('click', function(event) {
+            let id = event.target.id;
+            id = Number(id.slice(6));
+
+            $.ajax({
+               method: 'POST',
+               url: '../handlers/basketAddHandler.php',
+               data: {
+                  id: id,
+               },
+               success: function(response) {
+                  console.log(response);
+               },
+               error: function(xhr, status, error) {
+                  console.log(error);
+               }
+            });
          })
       });
    </script>

@@ -9,6 +9,7 @@
    flex-direction: column;
    /* border:2px solid red; */
    background-color: #e4e4e4;
+   font-family: 'Montserrat';
 }
 .content {
    flex: 1 1 100%;
@@ -169,4 +170,10 @@ cursor: pointer;
    color: #ffffff;
    font-weight: 600;
    font-size: 18px;
+}
+.form-content__radio {
+   font-size: 20px;
+   font-weight: 600px;
+   color: #000000;
+   margin-bottom: 20px;
 }
