@@ -1,3 +1,18 @@
 @import url('zero.css');
 @import url('header.css');
 @import url('footer.css');
+/* html{
+   height: 100%;
+} */
+.wrapper {
+   /* min-height: 100%; */
+}
+.container {
+   min-height: 100vh;
+   display: flex;
+   flex-direction: column;
+   /* border: 2px solid green; */
+}
+.bestsellers {
+   flex: 1 1 100%;
+}

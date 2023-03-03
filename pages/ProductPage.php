@@ -1,5 +1,20 @@
 <?php
 require '../includes/config.php';
+session_start();
+if ($_SESSION['user']['username']) {
+   $discount = 0.9;
+   $isaccess = 'yes';
+   // $_SESSION['currentFavourites'] = $SESS;
+} else {
+   $discount = 1;
+   $isaccess = 'no';
+   if (!$_SESSION['currentFavourites']) {
+      $_SESSION['currentFavourites'] = [];
+   }
+   if (!$_SESSION['currentBasket']) {
+      $_SESSION['currentBasket'] = array();
+   }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -16,11 +31,22 @@ require '../includes/config.php';
 </head>
 
 <body>
-
    <div class="wrapper">
       <div class="container">
          <?php require '../includes/header.php'; ?>
          <div class="content">
+            <?php
+            if ($isaccess === 'no') {
+               $banned = mysqli_query($connection, "SELECT id FROM `books` WHERE isforeveryone = 'no' ");
+               $currentID = $_GET['id'];
+               // echo $currentID;
+               while ($id = mysqli_fetch_assoc($banned)) {
+                  if ($currentID == $id['id']) {
+                     header('Location: /Test-Internet-Shop/pages/catalog.php');
+                  }
+               }
+            }
+            ?>
             <div class="about-product">
                <?php $product = mysqli_fetch_assoc(mysqli_query($connection, "SELECT * FROM `books` WHERE id=" . (int)$_GET['id'])); ?>
                <div class="about-product__control">
@@ -28,12 +54,19 @@ require '../includes/config.php';
                      <img src="../static/books/<?php echo $product['image'] ?>" alt="">
                   </div>
                   <div class="about-product__buttons">
-                     <a class="about-product__button" href="">
-                        <img src="../static/svg/favourite-empty.svg" alt="">
-                     </a>
-                     <a class="about-product__button" href="">
-                        <img src="../static/svg/basket.svg" alt="">
-                     </a>
+                     <?php
+                     if (in_array($product['id'], $_SESSION['currentFavourites'])) {
+                     ?>
+                        <img id="favourite<?php echo $product['id'] ?>" class='item-bestsellers__favourite about-product__button' src="../static/svg/favourite.svg" alt="">
+                     <?php
+                     } else {
+                     ?>
+                        <img id="favourite<?php echo $product['id'] ?>" class='item-bestsellers__favourite about-product__button' src="../static/svg/favourite-empty.svg" alt="">
+                     <?php
+                     }
+                     ?>
+                     <img id="basket<?php echo $product['id'] ?>" class="about-product__button item-bestsellers__buy" src="../static/svg/basket.svg" alt="">
+                     <!-- <img > -->
                   </div>
                </div>
                <div class="about-product__info info-about-product">
@@ -107,7 +140,7 @@ require '../includes/config.php';
                   </div>
                   <div class="info-about-product__money">
                      <div class="info-about-product__price">
-                        <?php echo $product['price'] . ' грн' ?>
+                        <?php echo ceil($product['price'] * $discount) . ' грн' ?>
                      </div>
                      <?php
                      if ($product['count'] > 0) {
@@ -129,7 +162,18 @@ require '../includes/config.php';
             </div>
             <div class="catalog">
                <?php
-               $bestsellers = mysqli_query($connection, "SELECT * FROM `books` WHERE country = " . $product['country']);
+               // print_r($_SESSION['currentFavourites']);
+               print_r($_SESSION['currentBasket']);
+               ?>
+               <?php
+               if ($isaccess === 'no') {
+                  $request = "(isforeveryone = 'yes') AND ";
+               } else {
+                  $request = '';
+               }
+               // echo "SELECT * FROM `books` WHERE" . $request . "  country = " . $product['country'];
+               // echo "SELECT * FROM `books` WHERE id != " . $_GET['id'] . " AND " . $request . " country = " . $product['country'];
+               $bestsellers = mysqli_query($connection, "SELECT * FROM `books` WHERE id != " . $_GET['id'] . " AND " . $request . " country = " . $product['country']);
                ?>
                <div class="catalog__title">
                   Книги, які можуть Вас зацікавити
@@ -143,7 +187,17 @@ require '../includes/config.php';
                            <a href="/Test-Internet-Shop/pages/ProductPage.php?id=<?= $bestseller['id'] ?>">
                               <img class='item-catalog__bookimage' src="../static/books/<?php echo $bestseller['image'] ?>" alt="">
                            </a>
-                           <img class='item-catalog__favourite' src="../static/svg/favourite-empty.svg" alt="">
+                           <?php
+                           if (in_array($bestseller['id'], $_SESSION['currentFavourites'])) {
+                           ?>
+                              <img id="favourite<?php echo $bestseller['id'] ?>" class='item-catalog__favourite ' src="../static/svg/favourite.svg" alt="">
+                           <?php
+                           } else {
+                           ?>
+                              <img id="favourite<?php echo $bestseller['id'] ?>" class='item-catalog__favourite ' src="../static/svg/favourite-empty.svg" alt="">
+                           <?php
+                           }
+                           ?>
                            <a class="item-catalog__title" href="/Test-Internet-Shop/pages/ProductPage.php?id=<?= $bestseller['id'] ?>">
                               <?php echo $bestseller['title']; ?>
                            </a>
@@ -151,15 +205,15 @@ require '../includes/config.php';
                               <?php echo $bestseller['author']; ?>
                            </div>
                            <div class="item-catalog__price">
-                              <?php echo $bestseller['price'] . ' грн'; ?>
+                              <?php echo ceil($bestseller['price'] * $discount) . ' грн'; ?>
                            </div>
                            <div class="item-catalog__buttons">
                               <a class="item-catalog__decription item-catalog__button" href="">
                                  Опис
                               </a>
-                              <a class="item-catalog__buy item-catalog__button" href="">
+                              <div id="basket<?php echo $bestseller['id'] ?>" class="item-catalog__buy item-catalog__button">
                                  У кошик
-                              </a>
+                              </div>
                            </div>
                         </div>
                      </div>
@@ -176,6 +230,62 @@ require '../includes/config.php';
       </div>
    </div>
    <script src="../js/index.js"></script>
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+   <script>
+      $(document).ready(function() {
+         $('.item-catalog__favourite, .item-bestsellers__favourite').on('click', function(event) {
+            // console.log(event.target);
+            // console.log(event.target.getAttribute('src'));
+            if (event.target.getAttribute('src').includes('empty')) {
+               event.target.setAttribute('src', '../static/svg/favourite.svg')
+            } else {
+               event.target.setAttribute('src', '../static/svg/favourite-empty.svg')
+            }
+
+            let id = event.target.id;
+            id = Number(id.slice(9));
+            console.log(event.target);
+            $.ajax({
+               method: 'POST',
+               url: '../handlers/favouriteHandler.php',
+               // isGenre
+               data: {
+                  id: id,
+               },
+               success: function(response) {
+                  console.log(response);
+               },
+               error: function(xhr, status, error) {
+                  console.log(error);
+               }
+            });
+            // console.log(event.target.id);
+            // console.log(id);
+         })
+      });
+   </script>
+   <script>
+      $(document).ready(function() {
+         $('.item-bestsellers__buy, .item-catalog__buy').on('click', function(event) {
+            let id = event.target.id;
+            id = Number(id.slice(6));
+            console.log(id);
+            $.ajax({
+               method: 'POST',
+               url: '../handlers/basketAddHandler.php',
+               data: {
+                  id: id,
+               },
+               success: function(response) {
+                  console.log(response);
+               },
+               error: function(xhr, status, error) {
+                  console.log(error);
+               }
+            });
+         })
+      });
+   </script>
 </body>
 
 </html>

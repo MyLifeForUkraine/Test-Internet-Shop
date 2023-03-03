@@ -1,5 +1,20 @@
 <?php
 require '../includes/config.php';
+session_start();
+if ($_SESSION['user']['username']) {
+   $discount = 0.9;
+   $isaccess = 'yes';
+   // $_SESSION['currentFavourites'] = $SESS;
+} else {
+   $discount = 1;
+   $isaccess = 'no';
+   if (!$_SESSION['currentFavourites']) {
+      $_SESSION['currentFavourites'] = [];
+   }
+   if (!$_SESSION['currentBasket']) {
+      $_SESSION['currentBasket'] = array();
+   }
+}
 ?>
 
 <!DOCTYPE html>
@@ -19,10 +34,24 @@ require '../includes/config.php';
 <body>
    <div class="wrapper">
       <div class="container">
+
+         <?php
+         // print_r($_SESSION['currentFavourites']);
+         // print_r($_SESSION['currentBasket']);
+         // echo '<pre>';
+         // // print_r($newCurrentBasket);
+         // print_r($_SESSION['currentBasket']);
+         // echo '</pre>';
+         ?>
          <?php require '../includes/header.php'; ?>
          <div class="bestsellers">
             <?php
-            $bestsellers = mysqli_query($connection, "SELECT * FROM `books` ORDER BY `sold_count` DESC LIMIT 12");
+            if ($isaccess === 'no') {
+               $additionalParametr = ' WHERE isforeveryone = "yes" ';
+            } else {
+               $additionalParametr = '';
+            }
+            $bestsellers = mysqli_query($connection, "SELECT * FROM `books`" . $additionalParametr . " ORDER BY `sold_count` DESC LIMIT 12");
             ?>
             <div class="bestsellers__title">
                Найбільш популярні книги
@@ -36,7 +65,17 @@ require '../includes/config.php';
                         <a href="/Test-Internet-Shop/pages/ProductPage.php?id=<?= $bestseller['id'] ?>">
                            <img class='item-bestsellers__bookimage' src="../static/books/<?php echo $bestseller['image'] ?>" alt="">
                         </a>
-                        <img class='item-bestsellers__favourite' src="../static/svg/favourite-empty.svg" alt="">
+                        <?php
+                        if (in_array($bestseller['id'], $_SESSION['currentFavourites'])) {
+                        ?>
+                           <img id="favourite<?php echo $bestseller['id'] ?>" class='item-bestsellers__favourite' src="../static/svg/favourite.svg" alt="">
+                        <?php
+                        } else {
+                        ?>
+                           <img id="favourite<?php echo $bestseller['id'] ?>" class='item-bestsellers__favourite' src="../static/svg/favourite-empty.svg" alt="">
+                        <?php
+                        }
+                        ?>
                         <a class="item-bestsellers__title" href="/Test-Internet-Shop/pages/ProductPage.php?id=<?= $bestseller['id'] ?>">
                            <?php echo $bestseller['title']; ?>
                         </a>
@@ -44,15 +83,15 @@ require '../includes/config.php';
                            <?php echo $bestseller['author']; ?>
                         </div>
                         <div class="item-bestsellers__price">
-                           <?php echo $bestseller['price'] . ' грн'; ?>
+                           <?php echo ceil($bestseller['price'] * $discount) . ' грн'; ?>
                         </div>
                         <div class="item-bestsellers__buttons">
-                           <a class="item-bestsellers__decription item-bestsellers__button" href="">
+                           <a class="item-bestsellers__decription item-bestsellers__button" href="/Test-Internet-Shop/pages/ProductPage.php?id=<?= $bestseller['id'] ?>">
                               Опис
                            </a>
-                           <a class="item-bestsellers__buy item-bestsellers__button" href="">
+                           <div id="basket<?php echo $bestseller['id'] ?>" class="item-bestsellers__buy item-bestsellers__button">
                               У кошик
-                           </a>
+                           </div>
                         </div>
                      </div>
                   </div>
@@ -70,6 +109,62 @@ require '../includes/config.php';
       </div>
    </div>
    <script src='../js/index.js'></script>
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+   <script>
+      $(document).ready(function() {
+         $('.item-bestsellers__favourite').on('click', function(event) {
+            // console.log(event.target);
+            // console.log(event.target.getAttribute('src'));
+            if (event.target.getAttribute('src').includes('empty')) {
+               event.target.setAttribute('src', '../static/svg/favourite.svg')
+            } else {
+               event.target.setAttribute('src', '../static/svg/favourite-empty.svg')
+            }
+
+            let id = event.target.id;
+            id = Number(id.slice(9));
+            $.ajax({
+               method: 'POST',
+               url: '../handlers/favouriteHandler.php',
+               // isGenre
+               data: {
+                  id: id,
+               },
+               success: function(response) {
+                  console.log(response);
+               },
+               error: function(xhr, status, error) {
+                  console.log(error);
+               }
+            });
+            // console.log(event.target.id);
+            // console.log(id);
+         })
+
+      });
+   </script>
+   <script>
+      $(document).ready(function() {
+         $('.item-bestsellers__buy').on('click', function(event) {
+            let id = event.target.id;
+            id = Number(id.slice(6));
+
+            $.ajax({
+               method: 'POST',
+               url: '../handlers/basketAddHandler.php',
+               data: {
+                  id: id,
+               },
+               success: function(response) {
+                  console.log(response);
+               },
+               error: function(xhr, status, error) {
+                  console.log(error);
+               }
+            });
+         })
+      });
+   </script>
 </body>
 
 </html>

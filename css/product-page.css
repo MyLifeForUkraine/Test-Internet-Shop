@@ -26,6 +26,10 @@
 .about-product__image {
    margin-bottom: 20px;
 }
+.about-product__image img{
+   max-width: 180px;
+   /* border: 2px solid red; */
+}
 .about-product__buttons {
    /* border:2px solid white; */
    display: flex;
@@ -36,9 +40,18 @@
    background-color: #f0dfcd;
    padding: 5px 20px;
    border-radius: 15px;
+   cursor:pointer;
+}
+.item-bestsellers__buy{
+   background-color: #f0dfcd;
+   padding: 5px 20px;
+   border-radius: 15px;
+   cursor:pointer;
+   width: 44px;
 }
 .about-product__button img{
    width: 40px;
+  
 }
 .about-product__info {
 }
@@ -70,6 +83,15 @@
 }
 .isInStock-info-about-product {
 }
+.item-catalog__favourite {
+   cursor:pointer;
+   border-radius:10px;
+   max-width: 30px;
+   position: absolute;
+   top:7%;
+   right:0%;
+   transform:translate(-20%,0%);
+}
 .isInStock-info-about-product__true {
 background-color: #77ed16;
 font-weight: 600;
@@ -78,6 +100,7 @@ max-width: 200px;
 padding: 5px 10px;
 text-align: center;
 border-radius:10px;
+/* margin-bottom: 30px; */
 }
 .isInStock-info-about-product__false {
    background-color: #ed166c;
@@ -87,6 +110,7 @@ max-width: 200px;
 padding: 5px 10px;
 text-align: center;
 border-radius:10px;
+/* margin-bottom: 30px */
 }
 
 .info-about-product__money{

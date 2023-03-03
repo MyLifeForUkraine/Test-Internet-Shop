@@ -1,0 +1,60 @@
+@import url('zero.css');
+/*------------------------------AUTHORIZATION------------------------------*/
+.wrapper-authorization {
+   font-family: 'Montserrat';
+   background-color: #e4e4e4;
+
+}
+.container-authorization {
+   min-height: 100vh;
+   display: flex;
+   flex-direction: column;
+
+}
+.content-authorization{
+   flex: 1 1 auto;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+
+.a {
+   color: #7c9ab7;
+   font-weight: bold;
+   text-decoration: none;
+}
+.p {
+   margin: 10px 0;
+}
+.form {
+   display: flex;
+   flex-direction: column;
+   width: 400px;
+}
+
+.input {
+   margin: 10px 0;
+   padding: 10px;
+   border: unset;
+   border-bottom: 2px solid #e3e3e3;
+   outline: none;
+}
+
+.button {
+   padding: 10px;
+   background: #c10eb2;
+   border: unset;
+   cursor: pointer;
+}
+
+.msg {
+   border: 2px solid #ffa908;
+   border-radius: 3px;
+   padding: 10px;
+   text-align: center;
+   font-weight: bold;
+}
+
+.logout {
+   color: #b7625c;
+}

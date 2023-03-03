@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <header class="header">
    <div class="header__logo logo-header">
       <img src="../static/svg/logo.svg" alt="">
@@ -20,6 +23,36 @@
             Каталог
          </a>
       </div>
+      <?php
+      if ($_SESSION['user']['role'] === 'admin') {
+      ?>
+         <div class="header__page">
+            <a href="/Test-Internet-Shop/pages/AdminPage.php" class="header__link-to-page">
+               Адмінка
+            </a>
+         </div>
+      <?php
+      }
+      ?>
+      <?php
+      if ($_SESSION['user']) {
+      ?>
+         <div class="header__page">
+            <a href="/Test-Internet-Shop/users/logout.php" class="header__link-to-page">
+               Вийти
+            </a>
+         </div>
+      <?php
+      } else {
+      ?>
+         <div class="header__page">
+            <a href="/Test-Internet-Shop/users/authorization.php" class="header__link-to-page">
+               Увійти
+            </a>
+         </div>
+      <?php
+      }
+      ?>
       <div class="header__page">
          <a href="/Test-Internet-Shop/pages/favourite.php" class="header__link-to-page">
             <img src="../static/svg/favourite.svg" alt="">
@@ -31,4 +64,8 @@
          </a>
       </div>
    </div>
+   <?php
+
+   echo $_SESSION['user']['role'];
+   ?>
 </header>
