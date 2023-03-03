@@ -250,7 +250,7 @@ if ($_SESSION['user']['username']) {
                      ?>
                         <div class="catalog__item item-catalog">
                            <div class="item-catalog__body">
-                              <a href="/Test-Internet-Shop/pages/ProductPage.php?id=<?= $bestseller['id'] ?>">
+                              <a href="../pages/ProductPage.php?id=<?= $bestseller['id'] ?>">
                                  <img class='item-catalog__bookimage' src="../static/books/<?php echo $bestseller['image'] ?>" alt="">
                               </a>
                               <?php
@@ -264,7 +264,7 @@ if ($_SESSION['user']['username']) {
                               <?php
                               }
                               ?>
-                              <a class="item-catalog__title" href="/Test-Internet-Shop/pages/ProductPage.php?id=<?= $bestseller['id'] ?>">
+                              <a class="item-catalog__title" href="../pages/ProductPage.php?id=<?= $bestseller['id'] ?>">
                                  <?php echo $bestseller['title']; ?>
                               </a>
                               <div class="item-catalog__author">
@@ -274,7 +274,7 @@ if ($_SESSION['user']['username']) {
                                  <?php echo ceil($bestseller['price'] * $discount) . ' грн'; ?>
                               </div>
                               <div class="item-catalog__buttons">
-                                 <a class="item-catalog__decription item-catalog__button" href="/Test-Internet-Shop/pages/ProductPage.php?id=<?= $bestseller['id'] ?>">
+                                 <a class="item-catalog__decription item-catalog__button" href="../pages/ProductPage.php?id=<?= $bestseller['id'] ?>">
                                     Опис
                                  </a>
                                  <div id="basket<?php echo $bestseller['id'] ?>" class="item-catalog__buy item-catalog__button">

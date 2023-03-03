@@ -53,4 +53,8 @@ echo $bid . '<br>';
 echo $price . '<br>';
 mysqli_query($connection, "INSERT INTO `orders` (`id`, `lastname`, `firstname`, `patronymic`, `email`, `phone`, `region`, `settlement`, `street`, `home`, `bid`, `posttype`, `price`) VALUES 
                                                 (NULL, '$lastname', '$firstname', '$patronymic', '$email', '$phone', '$region', '$settlement', '$street', '$home', '$bid', '$posttype', '$price')");
+$_SESSION['currentBasket'] = [];
+if ($_SESSION['user']['username']) {
+   mysqli_query($connection, "UPDATE `users` SET `basket` = '' WHERE `users`.`id` = " . $_SESSION['user']['id']);
+}
 header('Location: ../pages/purchase.php');
