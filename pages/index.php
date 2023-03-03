@@ -11,6 +11,9 @@ if ($_SESSION['user']['username']) {
    if (!$_SESSION['currentFavourites']) {
       $_SESSION['currentFavourites'] = [];
    }
+   if (!$_SESSION['currentBasket']) {
+      $_SESSION['currentBasket'] = [];
+   }
 }
 ?>
 
@@ -33,7 +36,8 @@ if ($_SESSION['user']['username']) {
       <div class="container">
 
          <?php
-         print_r($_SESSION['currentFavourites']);
+         // print_r($_SESSION['currentFavourites']);
+         print_r($_SESSION['currentBasket']);
          ?>
          <?php require '../includes/header.php'; ?>
          <div class="bestsellers">
@@ -81,9 +85,9 @@ if ($_SESSION['user']['username']) {
                            <a class="item-bestsellers__decription item-bestsellers__button" href="/Test-Internet-Shop/pages/ProductPage.php?id=<?= $bestseller['id'] ?>">
                               Опис
                            </a>
-                           <a class="item-bestsellers__buy item-bestsellers__button" href="">
+                           <div id="basket<?php echo $bestseller['id'] ?>" class="item-bestsellers__buy item-bestsellers__button">
                               У кошик
-                           </a>
+                           </div>
                         </div>
                      </div>
                   </div>
@@ -133,6 +137,27 @@ if ($_SESSION['user']['username']) {
             // console.log(id);
          })
 
+      });
+   </script>
+   <script>
+      $(document).ready(function() {
+         $('.item-bestsellers__buy').on('click', function(event) {
+            let id = event.target.id;
+            id = Number(id.slice(6));
+            $.ajax({
+               method: 'POST',
+               url: '../handlers/basketHandler.php',
+               data: {
+                  id: id,
+               },
+               success: function(response) {
+                  console.log(response);
+               },
+               error: function(xhr, status, error) {
+                  console.log(error);
+               }
+            });
+         })
       });
    </script>
 </body>

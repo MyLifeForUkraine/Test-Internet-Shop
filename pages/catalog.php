@@ -11,6 +11,9 @@ if ($_SESSION['user']['username']) {
    if (!$_SESSION['currentFavourites']) {
       $_SESSION['currentFavourites'] = [];
    }
+   if (!$_SESSION['currentBasket']) {
+      $_SESSION['currentBasket'] = [];
+   }
 }
 ?>
 <!DOCTYPE html>
@@ -34,6 +37,7 @@ if ($_SESSION['user']['username']) {
       <div class="container">
          <?php require '../includes/header.php'; ?>
          <div class="content">
+
             <form class="sideBar" method="get">
                <?php
                $currentGenres = [];
@@ -127,6 +131,11 @@ if ($_SESSION['user']['username']) {
             </form>
             <div class="catalog">
                <?php
+               // print_r($_SESSION['currentFavourites']);
+               print_r($_SESSION['currentBasket']);
+               ?>
+               <?php
+
                //initialize $genres
                $parametrs = '?';
                $genres = [];
@@ -268,9 +277,9 @@ if ($_SESSION['user']['username']) {
                                  <a class="item-catalog__decription item-catalog__button" href="/Test-Internet-Shop/pages/ProductPage.php?id=<?= $bestseller['id'] ?>">
                                     Опис
                                  </a>
-                                 <a class="item-catalog__buy item-catalog__button" href="">
+                                 <div id="basket<?php echo $bestseller['id'] ?>" class="item-catalog__buy item-catalog__button">
                                     У кошик
-                                 </a>
+                                 </div>
                               </div>
                            </div>
                         </div>
@@ -341,6 +350,27 @@ if ($_SESSION['user']['username']) {
             });
             // console.log(event.target.id);
             // console.log(id);
+         })
+      });
+   </script>
+   <script>
+      $(document).ready(function() {
+         $('.item-catalog__buy').on('click', function(event) {
+            let id = event.target.id;
+            id = Number(id.slice(6));
+            $.ajax({
+               method: 'POST',
+               url: '../handlers/basketHandler.php',
+               data: {
+                  id: id,
+               },
+               success: function(response) {
+                  console.log(response);
+               },
+               error: function(xhr, status, error) {
+                  console.log(error);
+               }
+            });
          })
       });
    </script>

@@ -120,6 +120,7 @@ margin-top: 50px;
    background-color: #3bf2a3;
    bottom:5%;
    right:5%;
+   cursor: pointer;
 }
 .item-catalog__buy:hover {
    background-color: #26a06b;

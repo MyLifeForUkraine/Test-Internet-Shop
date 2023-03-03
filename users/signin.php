@@ -23,7 +23,20 @@ if (mysqli_num_rows($check_user) > 0) {
       // echo $user['favourite'][$i] . PHP_EOL;
       // echo 'asa';
    }
-   // print_r($favourites);
+   $basket = [];
+   $currentBasket = '';
+   // echo $user['favourite'] . PHP_EOL;
+   for ($i = 0; $i < mb_strlen($user['basket']); $i++) {
+      if ($user['basket'][$i] !== ',') {
+         $currentBasket .= $user['basket'][$i];
+      } else {
+         $basket[] = (int)$currentBasket;
+         $currentBasket = '';
+      }
+      // echo $user['favourite'][$i] . PHP_EOL;
+      // echo 'asa';
+   }
+   print_r($basket);
    // echo gettype($favourites[0]);
    $_SESSION['user'] = [
       "id" => $user['id'],
@@ -34,6 +47,7 @@ if (mysqli_num_rows($check_user) > 0) {
       // "email" => $user['email']
    ];
    $_SESSION['currentFavourites'] = $favourites;
+   $_SESSION['currentBasket'] = $basket;
 
    header('Location: /Test-Internet-Shop/pages/index.php');
 } else {

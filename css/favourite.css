@@ -13,6 +13,6 @@
    flex-direction: column;
    /* border: 2px solid green; */
 }
-.content {
+.bestsellers {
    flex: 1 1 100%;
 }

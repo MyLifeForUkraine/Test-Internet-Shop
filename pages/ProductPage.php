@@ -11,6 +11,9 @@ if ($_SESSION['user']['username']) {
    if (!$_SESSION['currentFavourites']) {
       $_SESSION['currentFavourites'] = [];
    }
+   if (!$_SESSION['currentBasket']) {
+      $_SESSION['currentBasket'] = [];
+   }
 }
 ?>
 
@@ -33,6 +36,7 @@ if ($_SESSION['user']['username']) {
    <div class="wrapper">
       <div class="container">
          <?php require '../includes/header.php'; ?>
+
          <div class="content">
             <?php
             if ($isaccess === 'no') {
@@ -64,9 +68,8 @@ if ($_SESSION['user']['username']) {
                      <?php
                      }
                      ?>
-                     <a class="about-product__button" href="">
-                        <img src="../static/svg/basket.svg" alt="">
-                     </a>
+                     <img id="basket<?php echo $product['id'] ?>" class="about-product__button item-bestsellers__buy" src="../static/svg/basket.svg" alt="">
+                     <!-- <img > -->
                   </div>
                </div>
                <div class="about-product__info info-about-product">
@@ -162,6 +165,10 @@ if ($_SESSION['user']['username']) {
             </div>
             <div class="catalog">
                <?php
+               // print_r($_SESSION['currentFavourites']);
+               print_r($_SESSION['currentBasket']);
+               ?>
+               <?php
                if ($isaccess === 'no') {
                   $request = "(isforeveryone = 'yes') AND ";
                } else {
@@ -207,9 +214,9 @@ if ($_SESSION['user']['username']) {
                               <a class="item-catalog__decription item-catalog__button" href="">
                                  Опис
                               </a>
-                              <a class="item-catalog__buy item-catalog__button" href="">
+                              <div id="basket<?php echo $bestseller['id'] ?>" class="item-catalog__buy item-catalog__button">
                                  У кошик
-                              </a>
+                              </div>
                            </div>
                         </div>
                      </div>
@@ -257,6 +264,28 @@ if ($_SESSION['user']['username']) {
             });
             // console.log(event.target.id);
             // console.log(id);
+         })
+      });
+   </script>
+   <script>
+      $(document).ready(function() {
+         $('.item-bestsellers__buy, .item-catalog__buy').on('click', function(event) {
+            let id = event.target.id;
+            id = Number(id.slice(6));
+            // console.log(id);
+            $.ajax({
+               method: 'POST',
+               url: '../handlers/basketHandler.php',
+               data: {
+                  id: id,
+               },
+               success: function(response) {
+                  console.log(response);
+               },
+               error: function(xhr, status, error) {
+                  console.log(error);
+               }
+            });
          })
       });
    </script>
